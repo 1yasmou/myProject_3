@@ -10,8 +10,8 @@ const { handleNotFound } = require("../utils");
 
 //////////////////////////
 
-//Afficher la liste des équipements (GET /equipment) :
-//
+//KEEP ONLY afficher des equipements et afficher un equipement par ID.
+
 router.get("/", async (req, res, next) => {
   const page = parseInt(req.query.page || 1);
   const limit = 20;
@@ -43,8 +43,10 @@ router.get("/:equipmentId", async (req, res, next) => {
   }
 });
 
+//AS VERSION 2 , ajouter une page pour admin seulement pour tout le CRUD des équipements!!!!!!!!!
+
 //Ajouter un équipement (POST /equipment) :
-router.post("/equipment", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
   } catch (err) {
     next(err);
@@ -52,7 +54,7 @@ router.post("/equipment", async (req, res, next) => {
 });
 
 //Supprimer un équipement (DELETE /equipment/:equipmentId) :
-router.delete("/equipment/:equipmentId", async (req, res, next) => {
+router.delete("/:equipmentId", async (req, res, next) => {
   const equipmentId = req.params.id;
   try {
     // Ton code pour supprimer l'équipement avec l'identifiant spécifié
@@ -62,7 +64,7 @@ router.delete("/equipment/:equipmentId", async (req, res, next) => {
 });
 
 //Mettre à jour un équipement spécifique (PUT /equipment/:equipmentId) :
-router.put("/equipment/:equipmentId", async (req, res, next) => {
+router.put("/:equipmentId", async (req, res, next) => {
   const equipmentId = req.params.id;
   try {
   } catch (err) {

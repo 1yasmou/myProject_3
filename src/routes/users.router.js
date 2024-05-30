@@ -48,8 +48,11 @@ router.post("/login", async (req, res, next) => {
     next(err);
   }
 });
-
-router.get("/all", async (req, res, next) => {
+//ajouter check   if (req.user.isAdmin) { //only admin can see all users....!!!!!!!!!
+router.get("/", async (req, res, next) => {
+  //if (!req.user.isAdmin) {
+  // return res.status(403).json({ message: "Access denied. You are not an administrator." });
+  //}
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -57,10 +60,18 @@ router.get("/all", async (req, res, next) => {
     next(err);
   }
 });
+router.use(protectionMiddleware); // 👇 all routes bellow are now protected
+
+router.get("/me", (req, res, next) => {
+  // `user` was stored in `req` in the `protectionMiddleware`
+  res.json(req.user);
+});
 
 //delete accnt !!! c'est le plus important, modifier ...etc ce n'est pas important...
 
-router.delete("/delete/:userId", async (req, res, next) => {
+router.delete("/:userId", async (req, res, next) => {
+  // CHECK IF isAdmin !!!!
+  //si isAdmin you can delte sinon you can delete only id corresponds to user.id!!!!!!!!!!
   try {
     const user = await User.findOneAndDelete({ _id: req.params.userId });
     //console.log(req.params.userId);
@@ -80,14 +91,6 @@ router.delete("/delete/:userId", async (req, res, next) => {
 
 //afficher le profil de l'utilisateur:
 router.get("/profile", async (req, res, next) => {
-  try {
-  } catch (err) {
-    next(err);
-  }
-});
-
-//mettre à jour les informations de l'utilisateur:
-router.put("/profile", async (req, res, next) => {
   try {
   } catch (err) {
     next(err);

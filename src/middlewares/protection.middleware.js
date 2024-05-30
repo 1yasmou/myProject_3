@@ -12,7 +12,7 @@ async function protectionMiddleware(req, res, next) {
       res.status(401).json({ message: "Missing Bearer Token" });
       return;
     }
-
+    // console.log(token);
     // verifies the token and returns the payload
     const { email } = jwt.verify(token, TOKEN_SECRET);
 

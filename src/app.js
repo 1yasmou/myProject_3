@@ -8,6 +8,7 @@ const indexRouter = require("./routes/index.router");
 const usersRouter = require("./routes/users.router");
 const equipmentsRouter = require("./routes/equipments.router");
 const commentsRouter = require("./routes/comments.router");
+const favoritesRouter = require("./routes/favorites.router");
 const { catchAll, errorHandler } = require("./error-handling");
 
 const app = express();
@@ -25,7 +26,8 @@ app.use(
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/equipments", equipmentsRouter);
-app.use("/comments", commentsRouter);
+app.use("/", commentsRouter);
+app.use("/favorites", favoritesRouter);
 
 app.use(catchAll);
 app.use(errorHandler);
