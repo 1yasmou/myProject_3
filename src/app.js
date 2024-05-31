@@ -19,9 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(
-  cors({
+  cors(/*{
     origin: CORS_ORIGIN,
-  })
+  }*/)
 );
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
