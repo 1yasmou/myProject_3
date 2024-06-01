@@ -13,15 +13,22 @@ const { handleNotFound } = require("../utils");
 //KEEP ONLY afficher des equipements et afficher un equipement par ID.
 
 router.get("/", async (req, res, next) => {
-  const page = parseInt(req.query.page || 1);
+  const page = parseInt(req.query.page) || 1;
   const limit = 20;
   const offset = limit * (page - 1);
 
   try {
     const allEquipments = await Equipment.find().limit(limit).skip(offset);
+    const totalCount = await Equipment.countDocuments();
+
+    const pageCount = Math.ceil(totalCount / limit);
 
     //ajouter la pagination
-    res.status(200).json(allEquipments);
+    res.status(200).json({
+      equipments: allEquipments,
+      totalPages: pageCount,
+      currentPage: page,
+    });
   } catch (err) {
     next(err);
   }
