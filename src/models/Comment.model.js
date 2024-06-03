@@ -16,7 +16,7 @@ const commentSchema = new Schema(
     comment: {
       type: String,
 
-      //required: true,
+      //  required: true,
       maxLength: 300,
     },
     rating: {
