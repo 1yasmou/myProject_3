@@ -25,7 +25,7 @@ async function populateDb(dept) {
 
     while (!allFetched) {
       const response = await axios.get(
-        `https://equipements.sports.gouv.fr/api/explore/v2.1/catalog/datasets/data-es/records?where=dep_code%3D${dept}&select=inst_cp%2C%20inst_nom%2C%20inst_adresse%2C%20inst_cp%2C%20inst_etat%2C%20inst_trans_type%2C%20equip_numero%2C%20equip_nom%2C%20equip_type_code%2C%20equip_type_name%2C%20equip_type_famille%2C%20equip_etat%2C%20equip_x%2C%20equip_y%2C%20equip_douche%2C%20equip_pmr_acc%2C%20equip_eclair%2C%20equip_sanit%2C%20inst_date_creation%2C%20equip_nature&limit=${limit}&offset=${offset}`
+        `https://equipements.sports.gouv.fr/api/explore/v2.1/catalog/datasets/data-es/records?where=dep_code%3D${dept}&select=inst_cp%2Cinst_nom%2Cinst_adresse%2Cinst_etat%2Cinst_trans_type%2Cequip_numero%2Cequip_nom%2Cequip_type_code%2Cequip_type_name%2Cequip_type_famille%2Cequip_etat%2Cequip_x%2Cequip_y%2Cequip_douche%2Cequip_pmr_acc%2Cequip_eclair%2Cequip_sanit%2Cinst_date_creation%2Cequip_nature%2Cinst_acc_handi_bool%2Cequip_url%2Cequip_service_date%2Cnew_name%2Cinst_obs&limit=${limit}&offset=${offset}`
       );
 
       const data = response.data.results;

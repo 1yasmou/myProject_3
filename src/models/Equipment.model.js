@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const equipmentSchema = new Schema({
   equip_nom: {
     type: String,
-    required: true,
+    //required: true,
   },
   equip_numero: {
     type: String,
-    required: true,
+    //required: true,
   },
 
   inst_nom: {
@@ -36,22 +36,23 @@ const equipmentSchema = new Schema({
     type: String,
     default: "other",
   },
-  equip_numero: {
+  /* equip_numero: {
     type: String,
     default: "other",
   },
   equip_nom: {
     type: String,
     default: "other",
-  },
+  },*/
   equip_type_code: {
     type: String,
     default: "other",
   },
+  /*
   equip_type_name: {
     type: String,
     default: "other",
-  },
+  },*/
   equip_type_famille: {
     type: String,
     default: "other",
@@ -89,6 +90,30 @@ const equipmentSchema = new Schema({
     default: null, // pas besoin à supprimer
   },
   equip_nature: {
+    type: String,
+    default: "other",
+  },
+  inst_adresse: {
+    type: String,
+    default: "other",
+  },
+  inst_acc_handi_bool: {
+    type: String,
+    default: "other",
+  },
+  equip_url: {
+    type: String,
+    default: "other",
+  },
+  equip_service_date: {
+    type: String,
+    default: "other",
+  },
+  new_name: {
+    type: String,
+    default: "other",
+  },
+  inst_obs: {
     type: String,
     default: "other",
   },

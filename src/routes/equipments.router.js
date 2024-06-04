@@ -34,6 +34,18 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/search-by-postal-code", async (req, res, next) => {
+  const { postalCode } = req.query;
+  try {
+    const equipmentsByPostalCode = await Equipment.find({
+      inst_cp: postalCode,
+    });
+    res.status(200).json(equipmentsByPostalCode);
+  } catch (err) {
+    next(err);
+  }
+});
+
 //Voir les détails d'un équipement spécifique
 router.get("/:equipmentId", async (req, res, next) => {
   const equipmentId = req.params.equipmentId;
