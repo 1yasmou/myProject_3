@@ -14,12 +14,18 @@ const { handleNotFound } = require("../utils");
 
 router.get("/", async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
+  const cp = req.query.postalCode;
+  console.log(`postal code: ****${cp}`);
   const limit = 20;
   const offset = limit * (page - 1);
 
   try {
-    const allEquipments = await Equipment.find().limit(limit).skip(offset);
-    const totalCount = await Equipment.countDocuments();
+    const allEquipments = await Equipment.find(cp ? { inst_cp: cp } : undefined)
+      .limit(limit)
+      .skip(offset);
+    const totalCount = await Equipment.countDocuments(
+      cp ? { inst_cp: cp } : undefined
+    );
 
     const pageCount = Math.ceil(totalCount / limit);
 
@@ -28,6 +34,7 @@ router.get("/", async (req, res, next) => {
       equipments: allEquipments,
       totalPages: pageCount,
       currentPage: page,
+      postalCode: cp,
     });
   } catch (err) {
     next(err);

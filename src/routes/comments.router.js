@@ -121,7 +121,10 @@ router.get("/comments", async (req, res, next) => {
 router.get("/equipments/:equipmentId/comments", async (req, res, next) => {
   const { equipmentId } = req.params;
   try {
-    const comments = await Comment.find({ equipment: equipmentId });
+    const comments = await Comment.find({ equipment: equipmentId }).populate({
+      path: "author",
+      select: "email _id",
+    });
     res.json(comments);
   } catch (err) {
     next(err);
