@@ -6,7 +6,7 @@ const protectionMiddleware = require("../middlewares/protection.middleware");
 const Equipment = require("../models/Equipment.model");
 const { handleNotFound } = require("../utils");
 
-//router.use(protectionMiddleware); // 👇 all routes bellow are now protected
+//router.use(protectionMiddleware); // all routes bellow are now protected
 
 //////////////////////////
 
@@ -29,25 +29,12 @@ router.get("/", async (req, res, next) => {
 
     const pageCount = Math.ceil(totalCount / limit);
 
-    //ajouter la pagination
     res.status(200).json({
       equipments: allEquipments,
       totalPages: pageCount,
       currentPage: page,
       postalCode: cp,
     });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/search-by-postal-code", async (req, res, next) => {
-  const { postalCode } = req.query;
-  try {
-    const equipmentsByPostalCode = await Equipment.find({
-      inst_cp: postalCode,
-    });
-    res.status(200).json(equipmentsByPostalCode);
   } catch (err) {
     next(err);
   }
@@ -101,58 +88,3 @@ router.put("/:equipmentId", async (req, res, next) => {
 ///////////////////////////
 
 module.exports = router;
-
-/*
-router.post("/", async (req, res, next) => {
-  try {
-    const { name, location } = req.body;
-
-    const createdEquipment = await Journal.create({
-      name,
-      type,
-      location,
-      status,
-    });
-
-    res.json(createdEquipment);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/", async (req, res, next) => {
-  try {
-    // `user` was stored in `req` in the `protectionMiddleware`
-    if (req.user.isAdmin) {
-      const allJournals = await Journal.find();
-      res.json(allJournals);
-    } else {
-      const userJournals = await Journal.find({ author: req.user.id });
-      res.json(userJournals);
-    }
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.delete("/:journalId", async (req, res, next) => {
-  const { journalId } = req.params;
-
-  if (!mongoose.isValidObjectId(journalId)) {
-    handleNotFound(res);
-    return;
-  }
-
-  try {
-    // `user` was stored in `req` in the `protectionMiddleware`
-    if (req.user.isAdmin) {
-      await Journal.findByIdAndDelete(journalId);
-    } else {
-      await Journal.findOneAndDelete({ _id: journalId, author: req.user.id });
-    }
-
-    res.sendStatus(204);
-  } catch (err) {
-    next(err);
-  }
-});*/

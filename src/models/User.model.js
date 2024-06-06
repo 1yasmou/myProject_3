@@ -5,8 +5,6 @@ const userSchema = new Schema({
     type: String,
     required: [true, "email is required"],
     unique: [true, "email is already used"],
-
-    //ajouter une validation avec regex pour valider l'adresse email.
   },
   password: {
     type: String,

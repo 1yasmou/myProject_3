@@ -4,55 +4,38 @@ const Schema = mongoose.Schema;
 const equipmentSchema = new Schema({
   equip_nom: {
     type: String,
-    //required: true,
   },
   equip_numero: {
     type: String,
-    //required: true,
   },
 
   inst_nom: {
     type: String,
-    // enum: ["Stade de foot", "gymnase", "salle de danse", "piscine", "other"],
     default: "other",
   },
   inst_cp: {
     type: String,
-    // required: true,
     default: "other",
   },
   equip_type_name: {
     type: String,
-    //  enum: ["disponible", "en construction", "en maintenance"],
     default: "other",
   },
-  //ajoutes d'autres...
+
   inst_etat: {
-    type: String, //Pas sur du data type
-    //  enum: ["disponible", "en construction", "en maintenance"],
+    type: String,
     default: "other",
   },
   inst_trans_type: {
     type: String,
     default: "other",
   },
-  /* equip_numero: {
-    type: String,
-    default: "other",
-  },
-  equip_nom: {
-    type: String,
-    default: "other",
-  },*/
+
   equip_type_code: {
     type: String,
     default: "other",
   },
-  /*
-  equip_type_name: {
-    type: String,
-    default: "other",
-  },*/
+
   equip_type_famille: {
     type: String,
     default: "other",
@@ -87,7 +70,7 @@ const equipmentSchema = new Schema({
   },
   inst_date_creation: {
     type: Date,
-    default: null, // pas besoin à supprimer
+    default: null,
   },
   equip_nature: {
     type: String,
