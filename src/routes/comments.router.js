@@ -149,8 +149,26 @@ router.put(
   }
 );
 
-//pour afficher tous les commentaires
+//pour afficher tous les commentaires d'un utilisateur:
 
+router.get(
+  "/comments/:userId",
+  protectionMiddleware,
+  async (req, res, next) => {
+    try {
+      const userId = req.user.id;
+      const userComments = await Comment.find({ author: userId }).populate(
+        "author"
+      );
+      res.json(userComments);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+module.exports = router;
+/*
 router.get("/comments", protectionMiddleware, async (req, res, next) => {
   try {
     const comments = await Comment.find();
@@ -159,5 +177,5 @@ router.get("/comments", protectionMiddleware, async (req, res, next) => {
     next(err);
   }
 });
-
+*/
 module.exports = router;
